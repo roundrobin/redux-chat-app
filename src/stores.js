@@ -1,4 +1,6 @@
-
+//------------------------------------------------------------------------------
+// Chat message store
+//------------------------------------------------------------------------------
 let messageId = 0;
 export const chatMesssages = (state = [], action)=>{
     switch(action.type){
@@ -15,7 +17,9 @@ export const chatMesssages = (state = [], action)=>{
     }
 }
 
-
+//------------------------------------------------------------------------------
+// Rooms store
+//------------------------------------------------------------------------------
 let roomId = 0;
 export const rooms = (state = [], action)=>{
     switch(action.type){
@@ -31,7 +35,9 @@ export const rooms = (state = [], action)=>{
             return state
     }
 }
-
+//------------------------------------------------------------------------------
+// Visibilty store
+//------------------------------------------------------------------------------
 export const visibilityFilter = (state = false, action)=>{
     switch(action.type){
         case 'TOGGLE':

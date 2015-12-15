@@ -1,5 +1,8 @@
 import React from 'react';
 
+//------------------------------------------------------------------------------
+// Replybox component
+//------------------------------------------------------------------------------
 const ENTER_KEY = 13;
 export class Replybox extends React.Component{
     componentDidMount(){
@@ -31,6 +34,9 @@ Replybox.contextTypes = {
     store: React.PropTypes.object
 };
 
+//------------------------------------------------------------------------------
+// ChatThread component
+//------------------------------------------------------------------------------
 export class ChatThread extends React.Component{
     renderMessages(){
         const {store} = this.context;

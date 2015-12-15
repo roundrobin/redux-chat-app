@@ -1,9 +1,15 @@
 
+//------------------------------------------------------------------------------
+// External dependencies
+//------------------------------------------------------------------------------
 import {createStore, combineReducers} from 'redux';
 import React from 'react';
 import {Provider} from 'react-redux';
 import ReactDOM from 'react-dom';
 
+//------------------------------------------------------------------------------
+// Internal dependencies
+//------------------------------------------------------------------------------
 import './src/css/main.scss';
 
 import {
@@ -18,6 +24,10 @@ import {
     ChatThread
 } from './src/components.jsx';
 
+
+//------------------------------------------------------------------------------
+// Store creation
+//------------------------------------------------------------------------------
 const appStore = combineReducers({
     chatMesssages,
     rooms,
@@ -26,7 +36,9 @@ const appStore = combineReducers({
 
 const store = createStore(appStore);
 
-console.log('App started', store.getState());
+//------------------------------------------------------------------------------
+// Render main view
+//------------------------------------------------------------------------------
 const render = ()=> {
     ReactDOM.render(
         <Provider store={store}>
