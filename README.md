@@ -11,6 +11,7 @@ The goals of this project are:
 - Handle a router component as part of the global store
 - Develop views and reducers test driven
 - Potentially use hot reloading
+- Learn how to write performance optimized apps with Redux
 
 HOW TO START
 ============
