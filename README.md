@@ -1,7 +1,7 @@
 Redux Chat app
 ==============
 
-This apps is a exercise to get more familar with the concepts and best practices of Redux.
+This app is an exercise to get more familar with the concepts and best practices of Redux.
 
 The goals of this projects are:
 
