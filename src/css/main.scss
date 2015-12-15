@@ -1,3 +1,6 @@
+body{
+    font-family: Verdana, sans;
+}
 
 .message-thread{
     position: absolute;
@@ -6,6 +9,9 @@
     bottom: 50px;
     right: 0px;
     padding: 10px;
+    padding-left: 20px;
+    overflow-y: scroll;
+
 }
 .reply-box{
     position: absolute;

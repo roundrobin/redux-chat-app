@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 
 //------------------------------------------------------------------------------
 // Replybox component
@@ -50,9 +51,24 @@ export class ChatThread extends React.Component{
                 return <div key={msgObj.id}>{msgObj.text}</div>
         });
     }
+    componentDidUpdate() {
+        if (this.shouldScrollBottom && this.refs.messagesThread) {
+            let node = ReactDOM.findDOMNode(this.refs.messagesThread);
+            if(node){
+                node.scrollTop = node.scrollHeight;
+            }
+        }
+    }
+    componentWillUpdate() {
+        if(this.refs.messagesThread){
+            let node = ReactDOM.findDOMNode(this.refs.messagesThread);
+            this.shouldScrollBottom = node.scrollTop + node.offsetHeight === node.scrollHeight;
+        }
+
+    }
     render(){
         return (<div>
-            <div className='message-thread'>
+            <div className='message-thread' ref='messagesThread'>
             {this.renderMessages()}
             </div>
             <Replybox/>

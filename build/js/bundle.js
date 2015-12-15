@@ -25,15 +25,33 @@ webpackJsonp([0],{
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
+	//------------------------------------------------------------------------------
+	// Store creation
+	//------------------------------------------------------------------------------
 	var appStore = (0, _redux.combineReducers)({
 	    chatMesssages: _stores.chatMesssages,
 	    rooms: _stores.rooms,
 	    visibilityFilter: _stores.visibilityFilter
 	});
 	
+	//------------------------------------------------------------------------------
+	// Internal dependencies
+	//------------------------------------------------------------------------------
+	//
+	//
+	// Based on the 30 part video tutorial:
+	// https://egghead.io/lessons/javascript-redux-the-single-immutable-state-tree
+	//
+	//
+	//------------------------------------------------------------------------------
+	// External dependencies
+	//------------------------------------------------------------------------------
+	
 	var store = (0, _redux.createStore)(appStore);
 	
-	console.log('App started', store.getState());
+	//------------------------------------------------------------------------------
+	// Render main view
+	//------------------------------------------------------------------------------
 	var render = function render() {
 	    _reactDom2.default.render(_react2.default.createElement(
 	        _reactRedux.Provider,
@@ -654,6 +672,9 @@ webpackJsonp([0],{
 	
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 	
+	//------------------------------------------------------------------------------
+	// Chat message store
+	//------------------------------------------------------------------------------
 	var messageId = 0;
 	var chatMesssages = exports.chatMesssages = function chatMesssages() {
 	    var state = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
@@ -671,6 +692,9 @@ webpackJsonp([0],{
 	    }
 	};
 	
+	//------------------------------------------------------------------------------
+	// Rooms store
+	//------------------------------------------------------------------------------
 	var roomId = 0;
 	var rooms = exports.rooms = function rooms() {
 	    var state = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
@@ -687,7 +711,9 @@ webpackJsonp([0],{
 	            return state;
 	    }
 	};
-	
+	//------------------------------------------------------------------------------
+	// Visibilty store
+	//------------------------------------------------------------------------------
 	var visibilityFilter = exports.visibilityFilter = function visibilityFilter() {
 	    var state = arguments.length <= 0 || arguments[0] === undefined ? false : arguments[0];
 	    var action = arguments[1];
@@ -718,6 +744,10 @@ webpackJsonp([0],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _reactDom = __webpack_require__(176);
+	
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -726,6 +756,9 @@ webpackJsonp([0],{
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
+	//------------------------------------------------------------------------------
+	// Replybox component
+	//------------------------------------------------------------------------------
 	var ENTER_KEY = 13;
 	
 	var Replybox = exports.Replybox = (function (_React$Component) {
@@ -784,6 +817,10 @@ webpackJsonp([0],{
 	    store: _react2.default.PropTypes.object
 	};
 	
+	//------------------------------------------------------------------------------
+	// ChatThread component
+	//------------------------------------------------------------------------------
+	
 	var ChatThread = exports.ChatThread = (function (_React$Component2) {
 	    _inherits(ChatThread, _React$Component2);
 	
@@ -817,6 +854,24 @@ webpackJsonp([0],{
 	            });
 	        }
 	    }, {
+	        key: 'componentDidUpdate',
+	        value: function componentDidUpdate() {
+	            if (this.shouldScrollBottom && this.refs.messagesThread) {
+	                var node = _reactDom2.default.findDOMNode(this.refs.messagesThread);
+	                if (node) {
+	                    node.scrollTop = node.scrollHeight;
+	                }
+	            }
+	        }
+	    }, {
+	        key: 'componentWillUpdate',
+	        value: function componentWillUpdate() {
+	            if (this.refs.messagesThread) {
+	                var node = _reactDom2.default.findDOMNode(this.refs.messagesThread);
+	                this.shouldScrollBottom = node.scrollTop + node.offsetHeight === node.scrollHeight;
+	            }
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
 	            return _react2.default.createElement(
@@ -824,7 +879,7 @@ webpackJsonp([0],{
 	                null,
 	                _react2.default.createElement(
 	                    'div',
-	                    { className: 'message-thread' },
+	                    { className: 'message-thread', ref: 'messagesThread' },
 	                    this.renderMessages()
 	                ),
 	                _react2.default.createElement(Replybox, null)
