@@ -1,0 +1,44 @@
+
+.message-thread{
+    position: absolute;
+    top: 60px;
+    left: 0px;
+    bottom: 50px;
+    right: 0px;
+    padding: 10px;
+}
+.reply-box{
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+    right: 0px;
+}
+
+$input-height: 40px;
+$input-width: 80px;
+
+.reply-box__input{
+    height: $input-height;
+    width: 100%;
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+    right: $input-width;
+    font-size: 14px;
+    padding-left: 10px;
+    outline: 0px;
+}
+
+.reply-box__send{
+    height: $input-height;
+    width: $input-width;
+    font-size: 14px;
+    color: white;
+    background-color: #4A90E2;
+    border: 0px;
+    position: absolute;
+    bottom: 2px;
+    right: 10px;
+    outline: 0px;
+
+}
