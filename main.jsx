@@ -1,4 +1,9 @@
-
+//
+//
+// Based on the 30 part video tutorial:
+// https://egghead.io/lessons/javascript-redux-the-single-immutable-state-tree
+//
+//
 //------------------------------------------------------------------------------
 // External dependencies
 //------------------------------------------------------------------------------
