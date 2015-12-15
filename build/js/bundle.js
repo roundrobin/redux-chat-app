@@ -685,6 +685,8 @@ webpackJsonp([0],{
 	            return [].concat(_toConsumableArray(state), [{
 	                id: messageId++,
 	                text: action.text,
+	                username: action.username,
+	                date: action.date,
 	                upvotes: 0
 	            }]);
 	        default:
@@ -789,7 +791,9 @@ webpackJsonp([0],{
 	
 	            store.dispatch({
 	                type: 'ADD_MSG',
-	                text: text.value
+	                text: text.value,
+	                username: 'roundrobin',
+	                date: +new Date()
 	            });
 	
 	            this.refs.replyInput.value = '';
@@ -848,8 +852,19 @@ webpackJsonp([0],{
 	                console.log('view/ChatThread:renderMessages', msgObj);
 	                return _react2.default.createElement(
 	                    'div',
-	                    { key: msgObj.id },
-	                    msgObj.text
+	                    { key: msgObj.id, className: 'msg' },
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'msg__header' },
+	                        msgObj.username,
+	                        ' - ',
+	                        msgObj.date
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'msg__body' },
+	                        msgObj.text
+	                    )
 	                );
 	            });
 	        }

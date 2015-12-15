@@ -10,6 +10,8 @@ export const chatMesssages = (state = [], action)=>{
             {
                 id: messageId++,
                 text: action.text,
+                username: action.username,
+                date: action.date,
                 upvotes: 0
             }];
         default:

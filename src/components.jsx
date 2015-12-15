@@ -18,7 +18,9 @@ export class Replybox extends React.Component{
         const {store} = this.context;
         store.dispatch({
             type: 'ADD_MSG',
-            text: text.value
+            text: text.value,
+            username: 'roundrobin',
+            date: +new Date()
         });
 
         this.refs.replyInput.value = '';
@@ -48,7 +50,10 @@ export class ChatThread extends React.Component{
 
         return messsages.map((msgObj)=>{
                 console.log('view/ChatThread:renderMessages',msgObj);
-                return <div key={msgObj.id}>{msgObj.text}</div>
+                return <div key={msgObj.id} className='msg'>
+                <div className='msg__header'>{msgObj.username} - {msgObj.date}</div>
+                <div className='msg__body'>{msgObj.text}</div>
+                </div>
         });
     }
     componentDidUpdate() {
