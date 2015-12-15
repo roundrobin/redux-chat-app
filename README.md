@@ -3,7 +3,7 @@ Redux Chat app
 
 This app is an exercise to get more familar with the concepts and best practices of Redux.
 
-The goals of this projects are:
+The goals of this project are:
 
 - [x] Get familar with Redux
 - [x] Use ES6 or ES7 transcompilers
