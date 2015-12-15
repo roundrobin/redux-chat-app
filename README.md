@@ -12,3 +12,10 @@ The goals of this projects are:
 - Develop views and reducers test driven
 - Potentially use hot reloading
 
+HOW TO START
+============
+
+Just start a simple server in the directory which serves the `index.html` file.
+```
+ python -m SimpleHTTPServer
+```
