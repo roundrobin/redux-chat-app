@@ -19,3 +19,12 @@ Just start a simple server in the directory which serves the `index.html` file.
 ```
  python -m SimpleHTTPServer
 ```
+
+CREATE BUILD
+============
+
+To create a build an run a watcher script call:
+
+```
+    npm run assets
+```
