@@ -14,7 +14,6 @@ import { pushPath } from 'redux-simple-router';
 class RoomsView extends React.Component{
     _openRoom(roomId){
         console.log('view/Rooms:renderRooms', this.props);
-
         this.props.pushPath('/room/'+roomId);
     }
     renderRooms(){

@@ -14,9 +14,11 @@ import { ChatThread} from './ChatThread.jsx';
 // Views
 //------------------------------------------------------------------------------
 class RoomView extends React.Component{
+
     render(){
+        console.log('view/Rooms:render', this.props);
         return (<div>
-            <h1>Rooms</h1>
+            <h1>Room {this.props.params.roomSlug}</h1>
         </div>);
     }
 }

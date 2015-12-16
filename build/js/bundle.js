@@ -72,7 +72,7 @@ webpackJsonp([0],[
 	            _react2.default.createElement(_reactRouter.IndexRoute, { component: _SmallViews.Home }),
 	            _react2.default.createElement(_reactRouter.Route, { path: 'foo', component: _SmallViews.Foo }),
 	            _react2.default.createElement(_reactRouter.Route, { path: 'member/:username', component: _SmallViews.Member }),
-	            _react2.default.createElement(_reactRouter.Route, { path: 'room/:username', component: _SmallViews.Room })
+	            _react2.default.createElement(_reactRouter.Route, { path: 'room/:roomSlug', component: _SmallViews.Room })
 	        )
 	    )
 	), document.getElementById('root'));
@@ -17538,13 +17538,15 @@ webpackJsonp([0],[
 	    _createClass(RoomView, [{
 	        key: 'render',
 	        value: function render() {
+	            console.log('view/Rooms:render', this.props);
 	            return React.createElement(
 	                'div',
 	                null,
 	                React.createElement(
 	                    'h1',
 	                    null,
-	                    'Rooms'
+	                    'Room ',
+	                    this.props.params.roomSlug
 	                )
 	            );
 	        }
@@ -17680,7 +17682,6 @@ webpackJsonp([0],[
 	        key: '_openRoom',
 	        value: function _openRoom(roomId) {
 	            console.log('view/Rooms:renderRooms', this.props);
-	
 	            this.props.pushPath('/room/' + roomId);
 	        }
 	    }, {

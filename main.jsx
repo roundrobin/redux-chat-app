@@ -51,7 +51,7 @@ ReactDOM.render(
               <IndexRoute component={Home}/>
               <Route path="foo" component={Foo}/>
               <Route path="member/:username" component={Member}/>
-              <Route path="room/:username" component={Room}/>
+              <Route path="room/:roomSlug" component={Room}/>
           </Route>
         </Router>
     </Provider>,
