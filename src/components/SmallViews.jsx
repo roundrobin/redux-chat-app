@@ -13,6 +13,19 @@ import { ChatThread} from './ChatThread.jsx';
 //------------------------------------------------------------------------------
 // Views
 //------------------------------------------------------------------------------
+class RoomView extends React.Component{
+    render(){
+        return (<div>
+            <h1>Rooms</h1>
+        </div>);
+    }
+}
+
+export const Room = connect(
+  null,
+  { pushPath }
+)(RoomView);
+
 class HomeView extends React.Component{
     render(){
         return (<div>

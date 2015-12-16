@@ -4,7 +4,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import ReactDOM from 'react-dom';
-const { pushPath } = require('redux-simple-router');
+import { pushPath } from 'redux-simple-router';
 //------------------------------------------------------------------------------
 // Internal dependencies
 //------------------------------------------------------------------------------
@@ -15,7 +15,7 @@ class RoomsView extends React.Component{
     _openRoom(roomId){
         console.log('view/Rooms:renderRooms', this.props);
 
-        this.props.pushPath('/member/'+roomId);
+        this.props.pushPath('/room/'+roomId);
     }
     renderRooms(){
         let rooms = this.props.rooms;

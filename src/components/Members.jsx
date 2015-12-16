@@ -2,15 +2,19 @@
 // External dependencies
 //------------------------------------------------------------------------------
 import React from 'react';
+import {connect} from 'react-redux';
 import ReactDOM from 'react-dom';
-
+import { pushPath } from 'redux-simple-router';
 //------------------------------------------------------------------------------
 // Internal dependencies
 //------------------------------------------------------------------------------
 //------------------------------------------------------------------------------
 // Members component
 //------------------------------------------------------------------------------
-export default class Members extends React.Component{
+class Members extends React.Component{
+    showMember(memberId){
+        this.props.pushPath('/member/'+memberId);
+    }
     renderMembers(){
         let memberKeys = Object.keys(this.props.members);
         if(!memberKeys || memberKeys.length === 0){
@@ -21,7 +25,7 @@ export default class Members extends React.Component{
                 let member = this.props.members[username];
                 console.log('view/Members:renderMembers',member);
                 return (
-                    <div key={member.id} className='member'>
+                    <div key={member.id} className='member' onClick={this.showMember.bind(this, member.id)}>
                         <div className='member__username'>{member.username}</div>
                     </div>
                 );
@@ -33,3 +37,8 @@ export default class Members extends React.Component{
         </div>);
     }
 }
+
+export default connect(
+  null,
+  { pushPath }
+)(Members);

@@ -86,6 +86,11 @@ body {
   color: gray;
   font-size: 0.9em; }
 
+.member {
+  cursor: pointer; }
+  .member:hover {
+    text-decoration: underline; }
+
 .room {
   cursor: pointer; }
   .room:hover {

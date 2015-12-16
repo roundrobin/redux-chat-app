@@ -71,7 +71,8 @@ webpackJsonp([0],[
 	            { path: '/', component: _App2.default },
 	            _react2.default.createElement(_reactRouter.IndexRoute, { component: _SmallViews.Home }),
 	            _react2.default.createElement(_reactRouter.Route, { path: 'foo', component: _SmallViews.Foo }),
-	            _react2.default.createElement(_reactRouter.Route, { path: 'member/:username', component: _SmallViews.Member })
+	            _react2.default.createElement(_reactRouter.Route, { path: 'member/:username', component: _SmallViews.Member }),
+	            _react2.default.createElement(_reactRouter.Route, { path: 'room/:username', component: _SmallViews.Room })
 	        )
 	    )
 	), document.getElementById('root'));
@@ -11846,9 +11847,13 @@ webpackJsonp([0],[
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _reactRedux = __webpack_require__(167);
+	
 	var _reactDom = __webpack_require__(176);
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
+	
+	var _reduxSimpleRouter = __webpack_require__(537);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -11877,6 +11882,11 @@ webpackJsonp([0],[
 	    }
 	
 	    _createClass(Members, [{
+	        key: 'showMember',
+	        value: function showMember(memberId) {
+	            this.props.pushPath('/member/' + memberId);
+	        }
+	    }, {
 	        key: 'renderMembers',
 	        value: function renderMembers() {
 	            var _this2 = this;
@@ -11895,7 +11905,7 @@ webpackJsonp([0],[
 	                console.log('view/Members:renderMembers', member);
 	                return _react2.default.createElement(
 	                    'div',
-	                    { key: member.id, className: 'member' },
+	                    { key: member.id, className: 'member', onClick: _this2.showMember.bind(_this2, member.id) },
 	                    _react2.default.createElement(
 	                        'div',
 	                        { className: 'member__username' },
@@ -11918,7 +11928,7 @@ webpackJsonp([0],[
 	    return Members;
 	})(_react2.default.Component);
 	
-	exports.default = Members;
+	exports.default = (0, _reactRedux.connect)(null, { pushPath: _reduxSimpleRouter.pushPath })(Members);
 
 /***/ },
 /* 481 */
@@ -17482,7 +17492,7 @@ webpackJsonp([0],[
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
-	exports.Member = exports.Foo = exports.Home = undefined;
+	exports.Member = exports.Foo = exports.Home = exports.Room = undefined;
 	
 	var _ChatThread = __webpack_require__(478);
 	
@@ -17516,8 +17526,37 @@ webpackJsonp([0],[
 	// Views
 	//------------------------------------------------------------------------------
 	
-	var HomeView = (function (_React$Component) {
-	    _inherits(HomeView, _React$Component);
+	var RoomView = (function (_React$Component) {
+	    _inherits(RoomView, _React$Component);
+	
+	    function RoomView() {
+	        _classCallCheck(this, RoomView);
+	
+	        return _possibleConstructorReturn(this, Object.getPrototypeOf(RoomView).apply(this, arguments));
+	    }
+	
+	    _createClass(RoomView, [{
+	        key: 'render',
+	        value: function render() {
+	            return React.createElement(
+	                'div',
+	                null,
+	                React.createElement(
+	                    'h1',
+	                    null,
+	                    'Rooms'
+	                )
+	            );
+	        }
+	    }]);
+	
+	    return RoomView;
+	})(React.Component);
+	
+	var Room = exports.Room = connect(null, { pushPath: pushPath })(RoomView);
+	
+	var HomeView = (function (_React$Component2) {
+	    _inherits(HomeView, _React$Component2);
 	
 	    function HomeView() {
 	        _classCallCheck(this, HomeView);
@@ -17528,7 +17567,7 @@ webpackJsonp([0],[
 	    _createClass(HomeView, [{
 	        key: 'render',
 	        value: function render() {
-	            var _this2 = this;
+	            var _this3 = this;
 	
 	            return React.createElement(
 	                'div',
@@ -17536,7 +17575,7 @@ webpackJsonp([0],[
 	                React.createElement(
 	                    'button',
 	                    { onClick: function onClick() {
-	                            return _this2.props.pushPath('/foo');
+	                            return _this3.props.pushPath('/foo');
 	                        } },
 	                    'Go to /foo'
 	                ),
@@ -17609,6 +17648,8 @@ webpackJsonp([0],[
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
+	var _reduxSimpleRouter = __webpack_require__(537);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -17619,9 +17660,6 @@ webpackJsonp([0],[
 	// External dependencies
 	//------------------------------------------------------------------------------
 	
-	var _require = __webpack_require__(537);
-	
-	var pushPath = _require.pushPath;
 	//------------------------------------------------------------------------------
 	// Internal dependencies
 	//------------------------------------------------------------------------------
@@ -17643,7 +17681,7 @@ webpackJsonp([0],[
 	        value: function _openRoom(roomId) {
 	            console.log('view/Rooms:renderRooms', this.props);
 	
-	            this.props.pushPath('/member/' + roomId);
+	            this.props.pushPath('/room/' + roomId);
 	        }
 	    }, {
 	        key: 'renderRooms',
@@ -17687,7 +17725,7 @@ webpackJsonp([0],[
 	    return RoomsView;
 	})(_react2.default.Component);
 	
-	exports.default = (0, _reactRedux.connect)(null, { pushPath: pushPath })(RoomsView);
+	exports.default = (0, _reactRedux.connect)(null, { pushPath: _reduxSimpleRouter.pushPath })(RoomsView);
 
 /***/ }
 ]);

@@ -28,6 +28,7 @@ import App from './src/components/App.jsx';
 import {
     Home,
     Member,
+    Room,
     Foo
 } from './src/components/SmallViews.jsx';
 
@@ -50,6 +51,7 @@ ReactDOM.render(
               <IndexRoute component={Home}/>
               <Route path="foo" component={Foo}/>
               <Route path="member/:username" component={Member}/>
+              <Route path="room/:username" component={Room}/>
           </Route>
         </Router>
     </Provider>,
