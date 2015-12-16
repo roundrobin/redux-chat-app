@@ -53,11 +53,26 @@ const chatMesssages = (state = initialState, action)=>{
     }
 }
 
+
+
+//------------------------------------------------------------------------------
+// Room store
+//------------------------------------------------------------------------------
+
+let initialStateRooms = [];
+let roomId = 0;
+
+for(let i=0;i< 150;i++){
+    initialStateRooms.push({
+        id: roomId++,
+        title: 'room-'+roomId
+    });
+}
 //------------------------------------------------------------------------------
 // Rooms store
 //------------------------------------------------------------------------------
-let roomId = 0;
-const rooms = (state = [], action)=>{
+
+const rooms = (state = initialStateRooms, action)=>{
     switch(action.type){
         case 'ADD_ROOM':
             return [

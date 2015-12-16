@@ -27,6 +27,7 @@ import configureStore from './src/configureStore';
 import App from './src/components/App.jsx';
 import {
     Home,
+    Member,
     Foo
 } from './src/components/SmallViews.jsx';
 
@@ -39,8 +40,6 @@ const history = createHistory()
 
 syncReduxAndRouter(history, store);
 
-
-
 //------------------------------------------------------------------------------
 // Render main view
 //------------------------------------------------------------------------------
@@ -50,6 +49,7 @@ ReactDOM.render(
           <Route path="/" component={App}>
               <IndexRoute component={Home}/>
               <Route path="foo" component={Foo}/>
+              <Route path="member/:username" component={Member}/>
           </Route>
         </Router>
     </Provider>,

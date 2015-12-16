@@ -8,12 +8,12 @@ body {
   font-family: Verdana, sans; }
 
 #root {
-  max-width: 600px;
+  max-width: 800px;
   position: absolute;
   top: 60px;
   left: 0px;
   bottom: 0px;
-  width: 600px;
+  width: 800px;
   border: 1px solid gray; }
 
 .members {
@@ -27,10 +27,21 @@ body {
   width: 200px;
   background-color: #eee; }
 
+.rooms {
+  position: absolute;
+  top: 60px;
+  bottom: 40px;
+  left: 0px;
+  padding: 10px;
+  padding-left: 20px;
+  overflow-y: scroll;
+  width: 200px;
+  background-color: #eee; }
+
 .message-thread {
   position: absolute;
   top: 60px;
-  left: 0px;
+  left: 200px;
   bottom: 40px;
   right: 200px;
   padding: 10px;
@@ -74,5 +85,10 @@ body {
 .msg__header {
   color: gray;
   font-size: 0.9em; }
+
+.room {
+  cursor: pointer; }
+  .room:hover {
+    text-decoration: underline; }
 
 /*# sourceMappingURL=main.css.map*/

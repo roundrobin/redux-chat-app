@@ -14,12 +14,12 @@ body{
 }
 
 #root{
-    max-width: 600px;
+    max-width: 800px;
     position: absolute;
     top: 60px;
     left: 0px;
     bottom: 0px;
-    width: 600px;
+    width: 800px;
     border: 1px solid gray;
 }
 $input-height: 40px;
@@ -41,11 +41,23 @@ $members-panel-width: 200px;
     background-color: #eee;
 }
 
+.rooms{
+    position: absolute;
+    top: 60px;
+    bottom: $input-height;
+    left: 0px;
+    padding: 10px;
+    padding-left: 20px;
+    overflow-y: scroll;
+    width: $members-panel-width;
+    background-color: #eee;
+}
+
 
 .message-thread{
     position: absolute;
     top: 60px;
-    left: 0px;
+    left: $members-panel-width;
     bottom: $input-height;
     right: $members-panel-width;
     padding: 10px;
@@ -101,4 +113,13 @@ $members-panel-width: 200px;
 .msg__header{
     color: gray;
     font-size: 0.9em;
+}
+//------------------------------------------------------------------------------
+// Messages
+//------------------------------------------------------------------------------
+.room{
+    cursor: pointer;
+    &:hover{
+        text-decoration: underline;
+    }
 }

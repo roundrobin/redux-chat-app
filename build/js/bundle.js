@@ -70,7 +70,8 @@ webpackJsonp([0],[
 	            _reactRouter.Route,
 	            { path: '/', component: _App2.default },
 	            _react2.default.createElement(_reactRouter.IndexRoute, { component: _SmallViews.Home }),
-	            _react2.default.createElement(_reactRouter.Route, { path: 'foo', component: _SmallViews.Foo })
+	            _react2.default.createElement(_reactRouter.Route, { path: 'foo', component: _SmallViews.Foo }),
+	            _react2.default.createElement(_reactRouter.Route, { path: 'member/:username', component: _SmallViews.Member })
 	        )
 	    )
 	), document.getElementById('root'));
@@ -11369,11 +11370,24 @@ webpackJsonp([0],[
 	};
 	
 	//------------------------------------------------------------------------------
+	// Room store
+	//------------------------------------------------------------------------------
+	
+	var initialStateRooms = [];
+	var roomId = 0;
+	
+	for (var i = 0; i < 150; i++) {
+	    initialStateRooms.push({
+	        id: roomId++,
+	        title: 'room-' + roomId
+	    });
+	}
+	//------------------------------------------------------------------------------
 	// Rooms store
 	//------------------------------------------------------------------------------
-	var roomId = 0;
+	
 	var rooms = function rooms() {
-	    var state = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
+	    var state = arguments.length <= 0 || arguments[0] === undefined ? initialStateRooms : arguments[0];
 	    var action = arguments[1];
 	
 	    switch (action.type) {
@@ -11563,6 +11577,10 @@ webpackJsonp([0],[
 	
 	var _Members2 = _interopRequireDefault(_Members);
 	
+	var _RoomList = __webpack_require__(543);
+	
+	var _RoomList2 = _interopRequireDefault(_RoomList);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -11658,10 +11676,18 @@ webpackJsonp([0],[
 	            }
 	        }
 	    }, {
+	        key: '_sendMessage',
+	        value: function _sendMessage(text) {
+	            console.log('view/ChatThread:_sendMessage', 'call', text);
+	            this.props.sendMessage(text);
+	            this._scrollToBottom();
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
 	            console.log('view/ChatThread:render', 'call', this.props);
 	            var members = this.props.members;
+	            var rooms = this.props.rooms;
 	
 	            return _react2.default.createElement(
 	                'div',
@@ -11676,13 +11702,14 @@ webpackJsonp([0],[
 	                    { onClick: this.props.asyncMemberAction.bind(this) },
 	                    'Add random member'
 	                ),
+	                _react2.default.createElement(_RoomList2.default, { rooms: rooms }),
 	                _react2.default.createElement(_Members2.default, { members: members }),
 	                _react2.default.createElement(
 	                    'div',
 	                    { className: 'message-thread', ref: 'messagesThread' },
 	                    this.renderMessages()
 	                ),
-	                _react2.default.createElement(_Replybox2.default, { onSend: this.props.sendMessage })
+	                _react2.default.createElement(_Replybox2.default, { onSend: this._sendMessage.bind(this) })
 	            );
 	        }
 	    }]);
@@ -11693,7 +11720,8 @@ webpackJsonp([0],[
 	var mapStateToProps = function mapStateToProps(state) {
 	    return {
 	        members: state.members,
-	        chatMesssages: state.chatMesssages
+	        chatMesssages: state.chatMesssages,
+	        rooms: state.rooms
 	    };
 	};
 	
@@ -17449,12 +17477,20 @@ webpackJsonp([0],[
 
 	'use strict';
 	
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+	
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
-	exports.Foo = exports.Home = undefined;
+	exports.Member = exports.Foo = exports.Home = undefined;
 	
 	var _ChatThread = __webpack_require__(478);
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
 	//------------------------------------------------------------------------------
 	// External dependencies
@@ -17479,29 +17515,44 @@ webpackJsonp([0],[
 	//------------------------------------------------------------------------------
 	// Views
 	//------------------------------------------------------------------------------
-	function HomeView(_ref) {
-	    var pushPath = _ref.pushPath;
-	    var children = _ref.children;
 	
-	    return React.createElement(
-	        'div',
-	        null,
-	        React.createElement(
-	            'button',
-	            { onClick: function onClick() {
-	                    return pushPath('/foo');
-	                } },
-	            'Go to /foo'
-	        ),
-	        React.createElement(_ChatThread.ChatThread, this.props)
-	    );
-	}
+	var HomeView = (function (_React$Component) {
+	    _inherits(HomeView, _React$Component);
+	
+	    function HomeView() {
+	        _classCallCheck(this, HomeView);
+	
+	        return _possibleConstructorReturn(this, Object.getPrototypeOf(HomeView).apply(this, arguments));
+	    }
+	
+	    _createClass(HomeView, [{
+	        key: 'render',
+	        value: function render() {
+	            var _this2 = this;
+	
+	            return React.createElement(
+	                'div',
+	                null,
+	                React.createElement(
+	                    'button',
+	                    { onClick: function onClick() {
+	                            return _this2.props.pushPath('/foo');
+	                        } },
+	                    'Go to /foo'
+	                ),
+	                React.createElement(_ChatThread.ChatThread, this.props)
+	            );
+	        }
+	    }]);
+	
+	    return HomeView;
+	})(React.Component);
 	
 	var Home = exports.Home = connect(null, { pushPath: pushPath })(HomeView);
 	
-	function FooView(_ref2) {
-	    var pushPath = _ref2.pushPath;
-	    var children = _ref2.children;
+	function FooView(_ref) {
+	    var pushPath = _ref.pushPath;
+	    var children = _ref.children;
 	
 	    return React.createElement(
 	        'div',
@@ -17518,6 +17569,125 @@ webpackJsonp([0],[
 	}
 	
 	var Foo = exports.Foo = connect(null, { pushPath: pushPath })(FooView);
+	
+	function MemberView(_ref2) {
+	    var pushPath = _ref2.pushPath;
+	    var children = _ref2.children;
+	
+	    return React.createElement(
+	        'div',
+	        null,
+	        React.createElement(
+	            'h1',
+	            null,
+	            'Members view'
+	        )
+	    );
+	}
+	
+	var Member = exports.Member = connect(null, { pushPath: pushPath })(MemberView);
+
+/***/ },
+/* 543 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _react = __webpack_require__(11);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactRedux = __webpack_require__(167);
+	
+	var _reactDom = __webpack_require__(176);
+	
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } //------------------------------------------------------------------------------
+	// External dependencies
+	//------------------------------------------------------------------------------
+	
+	var _require = __webpack_require__(537);
+	
+	var pushPath = _require.pushPath;
+	//------------------------------------------------------------------------------
+	// Internal dependencies
+	//------------------------------------------------------------------------------
+	//------------------------------------------------------------------------------
+	// Members component
+	//------------------------------------------------------------------------------
+	
+	var RoomsView = (function (_React$Component) {
+	    _inherits(RoomsView, _React$Component);
+	
+	    function RoomsView() {
+	        _classCallCheck(this, RoomsView);
+	
+	        return _possibleConstructorReturn(this, Object.getPrototypeOf(RoomsView).apply(this, arguments));
+	    }
+	
+	    _createClass(RoomsView, [{
+	        key: '_openRoom',
+	        value: function _openRoom(roomId) {
+	            console.log('view/Rooms:renderRooms', this.props);
+	
+	            this.props.pushPath('/member/' + roomId);
+	        }
+	    }, {
+	        key: 'renderRooms',
+	        value: function renderRooms() {
+	            var _this2 = this;
+	
+	            var rooms = this.props.rooms;
+	            if (!rooms || rooms.length === 0) {
+	                return _react2.default.createElement(
+	                    'div',
+	                    null,
+	                    'No rooms'
+	                );
+	            }
+	
+	            console.log('view/Members:renderRooms', rooms);
+	            return rooms.map(function (room) {
+	                console.log('view/Rooms:renderRooms', room);
+	                return _react2.default.createElement(
+	                    'div',
+	                    { key: 'r-' + room.id, className: 'room' },
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'room__title', onClick: _this2._openRoom.bind(_this2, room.id) },
+	                        room.title
+	                    )
+	                );
+	            });
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'rooms' },
+	                this.renderRooms()
+	            );
+	        }
+	    }]);
+	
+	    return RoomsView;
+	})(_react2.default.Component);
+	
+	exports.default = (0, _reactRedux.connect)(null, { pushPath: pushPath })(RoomsView);
 
 /***/ }
 ]);

@@ -12,6 +12,8 @@ import {addMessage, asyncSayActionCreator, addRandomMember} from '../actions';
 
 import Replybox from './Replybox.jsx';
 import Members from './Members.jsx';
+import RoomList from './RoomList.jsx';
+
 
 //------------------------------------------------------------------------------
 // ChatThread component
@@ -62,25 +64,33 @@ class ChatThreadWrapped extends React.Component{
         }
 
     }
+    _sendMessage(text){
+        console.log('view/ChatThread:_sendMessage', 'call', text);
+        this.props.sendMessage(text);
+        this._scrollToBottom();
+    }
     render(){
         console.log('view/ChatThread:render', 'call', this.props);
         let members = this.props.members;
+        let rooms = this.props.rooms;
 
         return (<div>
             <button onClick={this.props.asyncMessage.bind(this)}>Async message adding</button>
             <button onClick={this.props.asyncMemberAction.bind(this)}>Add random member</button>
+            <RoomList rooms={rooms}/>
             <Members members={members}/>
             <div className='message-thread' ref='messagesThread'>
                 {this.renderMessages()}
             </div>
-            <Replybox onSend={this.props.sendMessage}/>
+            <Replybox onSend={this._sendMessage.bind(this)}/>
         </div>);
     }
 }
 const mapStateToProps = (state) =>{
     return {
         members: state.members,
-        chatMesssages: state.chatMesssages
+        chatMesssages: state.chatMesssages,
+        rooms: state.rooms
     }
 }
 

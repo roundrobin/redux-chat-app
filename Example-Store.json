@@ -13,7 +13,13 @@
         loggedIn: true,
         isOnline: true
         user: {
-            username: "roundrobin"
+            username: "roundrobin",
+            karma: 2323
+        },
+        roomMemberships: {
+            0: { _id: 0, title: "Games", unreadCount: 0, topic: {}, bots: {}, hasMention: true},
+            1: { _id: 1, title: "Chess", unreadCount: 0, topic: {}, bots: {},  hasMention: true},
+            2: { _id: 2, title: "Space", unreadCount: 0, topic: {}, bots: {}, hasMention: true}
         }
     },
     diaglogs: {
@@ -21,21 +27,41 @@
         importantAnnounceMent: {show: false}
     },
     settings: {
+        soundSettingsLoaded: false,
         sound: true,
         pushNotifications: true,
         showJoinMessages: false,
         showLeaveMessages: true
     },
     rooms: {
-        0: { _id: 0, title: "Games", unreadCount: 0, topic: {}, bots: {}, hasMention: true},
-        1: { _id: 1, title: "Chess", unreadCount: 0, topic: {}, bots: {},  hasMention: true},
-        2: { _id: 2, title: "Space", unreadCount: 0, topic: {}, bots: {}, hasMention: true},
-        3: { _id: 3, title: "Movies", unreadCount: 0, topic: {}, bots: {}, hasMention: true},
-        4: { _id: 4, title: "Skating", unreadCount: 0, topic: {}, bots: {}, hasMention: true},
-        5: { _id: 5, title: "Wind Surfing", unreadCount: 0, topic: {}, bots: {}, hasMention: true},
-        6: { _id: 6, title: "Camping", unreadCount: 0, topic: {}, bots: {}, hasMention: true},
-        7: { _id: 7, title: "Whales", unreadCount: 0, topic: {}, bots: {}, hasMention: true},
-        8: { _id: 8, title: "Food", unreadCount: 0, topic: {}, bots: {}, hasMention: true}
+        page: {
+            0: {
+                page: 0,
+                isFetching: false,
+                isStale: false,
+                rooms: {
+                    0: { _id: 0, title: "Games", unreadCount: 0, topic: {}, bots: {}, hasMention: true},
+                    1: { _id: 1, title: "Chess", unreadCount: 0, topic: {}, bots: {},  hasMention: true},
+                    2: { _id: 2, title: "Space", unreadCount: 0, topic: {}, bots: {}, hasMention: true},
+                    3: { _id: 3, title: "Movies", unreadCount: 0, topic: {}, bots: {}, hasMention: true},
+                    4: { _id: 4, title: "Skating", unreadCount: 0, topic: {}, bots: {}, hasMention: true},
+                    5: { _id: 5, title: "Wind Surfing", unreadCount: 0, topic: {}, bots: {}, hasMention: true},
+                    6: { _id: 6, title: "Camping", unreadCount: 0, topic: {}, bots: {}, hasMention: true},
+                    7: { _id: 7, title: "Whales", unreadCount: 0, topic: {}, bots: {}, hasMention: true},
+                    8: { _id: 8, title: "Food", unreadCount: 0, topic: {}, bots: {}, hasMention: true}
+                }
+            },
+            1: {
+                page: 1,
+                isFetching: false,
+                isStale: false,
+                rooms: {
+                    9: { _id: 0, title: "Snowboarding", unreadCount: 0, topic: {}, bots: {}, hasMention: true},
+                    10: { _id: 1, title: "Golf", unreadCount: 0, topic: {}, bots: {},  hasMention: true},
+                }
+
+            }
+        }
     },
     messages: {
         0: [
