@@ -7,12 +7,32 @@ html {
 body {
   font-family: Verdana, sans; }
 
+#root {
+  max-width: 600px;
+  position: absolute;
+  top: 60px;
+  left: 0px;
+  bottom: 0px;
+  width: 600px;
+  border: 1px solid gray; }
+
+.members {
+  position: absolute;
+  top: 60px;
+  bottom: 40px;
+  right: 0px;
+  padding: 10px;
+  padding-left: 20px;
+  overflow-y: scroll;
+  width: 200px;
+  background-color: #eee; }
+
 .message-thread {
   position: absolute;
   top: 60px;
   left: 0px;
-  bottom: 50px;
-  right: 0px;
+  bottom: 40px;
+  right: 200px;
   padding: 10px;
   padding-left: 20px;
   overflow-y: scroll; }
@@ -47,6 +67,9 @@ body {
   bottom: 0px;
   right: 0px;
   outline: 0px; }
+
+.msg {
+  margin-bottom: 10px; }
 
 .msg__header {
   color: gray;

@@ -39,14 +39,16 @@
     },
     messages: {
         0: [
-            { _id: 123, text: "Hello", timestamp: 12345},
-            { _id: 124, text: "How are you?", timestamp: 12345}
+            { _id: 123, text: "Hello", timestamp: 12345, type: "message", deleted: false},
+            { _id: 124, text: "How are you?", timestamp: 12347, , type: "system", deleted: false},
+            { _id: 124, text: "enoex joined the room", timestamp: 12348, , type: "system", deleted: false},
+            { _id: 124, text: "Idiom: Blablabla", timestamp: 12349, , type: "bot", deleted: false}
         ]
     },
     members: {
         0: [
-            { _id: 456434, username: "The game", online: true, flair: {}, isMod: false, isAdmin: false},
-            { _id: 456435, username: "A$ap Rocky", online: true, flair: {}, isMod: false, isAdmin: false},
+            { _id: 456434, username: "The game", online: true, flair: {}, isMod: false, isAdmin: false, isFriend: false},
+            { _id: 456435, username: "A$ap Rocky", online: true, flair: {}, isMod: false, isAdmin: false, , isFriend: true},
         ]
     },
     currentRoute: {

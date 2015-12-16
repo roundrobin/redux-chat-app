@@ -13,15 +13,41 @@ body{
     font-family: Verdana, sans;
 }
 
+#root{
+    max-width: 600px;
+    position: absolute;
+    top: 60px;
+    left: 0px;
+    bottom: 0px;
+    width: 600px;
+    border: 1px solid gray;
+}
+$input-height: 40px;
+$input-width: 80px;
+
+$members-panel-width: 200px;
 //------------------------------------------------------------------------------
 // Message thread
 //------------------------------------------------------------------------------
+.members{
+    position: absolute;
+    top: 60px;
+    bottom: $input-height;
+    right: 0px;
+    padding: 10px;
+    padding-left: 20px;
+    overflow-y: scroll;
+    width: $members-panel-width;
+    background-color: #eee;
+}
+
+
 .message-thread{
     position: absolute;
     top: 60px;
     left: 0px;
-    bottom: 50px;
-    right: 0px;
+    bottom: $input-height;
+    right: $members-panel-width;
     padding: 10px;
     padding-left: 20px;
     overflow-y: scroll;
@@ -37,8 +63,6 @@ body{
     right: 0px;
 }
 
-$input-height: 40px;
-$input-width: 80px;
 
 .reply-box__input{
     height: $input-height;
@@ -71,6 +95,9 @@ $input-width: 80px;
 //------------------------------------------------------------------------------
 // Messages
 //------------------------------------------------------------------------------
+.msg{
+    margin-bottom: 10px;
+}
 .msg__header{
     color: gray;
     font-size: 0.9em;

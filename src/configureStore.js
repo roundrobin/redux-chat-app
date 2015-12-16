@@ -2,11 +2,12 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import { persistState } from 'redux-devtools';
 import rootReducer from './reducers';
 import DevTools from './DevTools.jsx';
+import thunk from 'redux-thunk';
 
 const finalCreateStore = compose(
   // Middleware you want to use in development:
   // Required! Enable Redux DevTools with the monitors you chose
-  applyMiddleware(),
+  applyMiddleware(thunk),
   DevTools.instrument(),
   // Optional. Lets you write ?debug_session=<key> in address bar to persist debug sessions
   persistState(getDebugSessionKey())

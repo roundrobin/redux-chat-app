@@ -22,7 +22,7 @@ webpackJsonp([0],[
 	
 	var _configureStore2 = _interopRequireDefault(_configureStore);
 	
-	var _components = __webpack_require__(179);
+	var _ChatThread = __webpack_require__(478);
 	
 	var _DevTools = __webpack_require__(473);
 	
@@ -47,27 +47,20 @@ webpackJsonp([0],[
 	// External dependencies
 	//------------------------------------------------------------------------------
 	var store = (0, _configureStore2.default)();
+	
 	//------------------------------------------------------------------------------
 	// Render main view
 	//------------------------------------------------------------------------------
-	var render = function render() {
-	    _reactDom2.default.render(_react2.default.createElement(
-	        _reactRedux.Provider,
-	        { store: store },
-	        _react2.default.createElement(
-	            'div',
-	            null,
-	            _react2.default.createElement(_components.ChatThread, null),
-	            _react2.default.createElement(_DevTools2.default, null)
-	        )
-	    ), document.getElementById('root'));
-	};
-	
-	store.subscribe(function () {
-	    render();
-	});
-	
-	render();
+	_reactDom2.default.render(_react2.default.createElement(
+	    _reactRedux.Provider,
+	    { store: store },
+	    _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(_ChatThread.ChatThread, null),
+	        _react2.default.createElement(_DevTools2.default, null)
+	    )
+	), document.getElementById('root'));
 	
 	console.log('App started', store.getState());
 
@@ -821,186 +814,7 @@ webpackJsonp([0],[
 
 /***/ },
 /* 178 */,
-/* 179 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-	
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	exports.ChatThread = exports.Replybox = undefined;
-	
-	var _react = __webpack_require__(11);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _reactDom = __webpack_require__(176);
-	
-	var _reactDom2 = _interopRequireDefault(_reactDom);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	//------------------------------------------------------------------------------
-	// Replybox component
-	//------------------------------------------------------------------------------
-	var ENTER_KEY = 13;
-	
-	var Replybox = exports.Replybox = (function (_React$Component) {
-	    _inherits(Replybox, _React$Component);
-	
-	    function Replybox() {
-	        _classCallCheck(this, Replybox);
-	
-	        return _possibleConstructorReturn(this, Object.getPrototypeOf(Replybox).apply(this, arguments));
-	    }
-	
-	    _createClass(Replybox, [{
-	        key: 'componentDidMount',
-	        value: function componentDidMount() {
-	            var _this2 = this;
-	
-	            document.addEventListener('keypress', function (e) {
-	                if (e.which === ENTER_KEY) {
-	                    _this2.sendMessage();
-	                }
-	            });
-	        }
-	    }, {
-	        key: 'sendMessage',
-	        value: function sendMessage() {
-	            var text = this.refs.replyInput;
-	            var store = this.context.store;
-	
-	            store.dispatch({
-	                type: 'ADD_MSG',
-	                text: text.value,
-	                username: 'roundrobin',
-	                date: +new Date()
-	            });
-	
-	            this.refs.replyInput.value = '';
-	        }
-	    }, {
-	        key: 'render',
-	        value: function render() {
-	            return _react2.default.createElement(
-	                'div',
-	                { className: 'reply-box' },
-	                _react2.default.createElement('input', { type: 'text', ref: 'replyInput', className: 'reply-box__input', placeholder: 'Say something nice' }),
-	                _react2.default.createElement(
-	                    'button',
-	                    { className: 'reply-box__send', onClick: this.sendMessage.bind(this) },
-	                    'Send'
-	                )
-	            );
-	        }
-	    }]);
-	
-	    return Replybox;
-	})(_react2.default.Component);
-	
-	Replybox.contextTypes = {
-	    store: _react2.default.PropTypes.object
-	};
-	
-	//------------------------------------------------------------------------------
-	// ChatThread component
-	//------------------------------------------------------------------------------
-	
-	var ChatThread = exports.ChatThread = (function (_React$Component2) {
-	    _inherits(ChatThread, _React$Component2);
-	
-	    function ChatThread() {
-	        _classCallCheck(this, ChatThread);
-	
-	        return _possibleConstructorReturn(this, Object.getPrototypeOf(ChatThread).apply(this, arguments));
-	    }
-	
-	    _createClass(ChatThread, [{
-	        key: 'renderMessages',
-	        value: function renderMessages() {
-	            var store = this.context.store;
-	
-	            var messsages = store.getState().chatMesssages;
-	            if (!messsages || messsages.length === 0) {
-	                return _react2.default.createElement(
-	                    'div',
-	                    null,
-	                    'No messages'
-	                );
-	            }
-	
-	            return messsages.map(function (msgObj) {
-	                console.log('view/ChatThread:renderMessages', msgObj);
-	                return _react2.default.createElement(
-	                    'div',
-	                    { key: msgObj.id, className: 'msg' },
-	                    _react2.default.createElement(
-	                        'div',
-	                        { className: 'msg__header' },
-	                        msgObj.username,
-	                        ' - ',
-	                        msgObj.date
-	                    ),
-	                    _react2.default.createElement(
-	                        'div',
-	                        { className: 'msg__body' },
-	                        msgObj.text
-	                    )
-	                );
-	            });
-	        }
-	    }, {
-	        key: 'componentDidUpdate',
-	        value: function componentDidUpdate() {
-	            if (this.shouldScrollBottom && this.refs.messagesThread) {
-	                var node = _reactDom2.default.findDOMNode(this.refs.messagesThread);
-	                if (node) {
-	                    node.scrollTop = node.scrollHeight;
-	                }
-	            }
-	        }
-	    }, {
-	        key: 'componentWillUpdate',
-	        value: function componentWillUpdate() {
-	            if (this.refs.messagesThread) {
-	                var node = _reactDom2.default.findDOMNode(this.refs.messagesThread);
-	                this.shouldScrollBottom = node.scrollTop + node.offsetHeight === node.scrollHeight;
-	            }
-	        }
-	    }, {
-	        key: 'render',
-	        value: function render() {
-	            return _react2.default.createElement(
-	                'div',
-	                null,
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'message-thread', ref: 'messagesThread' },
-	                    this.renderMessages()
-	                ),
-	                _react2.default.createElement(Replybox, null)
-	            );
-	        }
-	    }]);
-	
-	    return ChatThread;
-	})(_react2.default.Component);
-	
-	ChatThread.contextTypes = {
-	    store: _react2.default.PropTypes.object
-	};
-
-/***/ },
+/* 179 */,
 /* 180 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -11488,6 +11302,25 @@ webpackJsonp([0],[
 	//------------------------------------------------------------------------------
 	// Chat message store
 	//------------------------------------------------------------------------------
+	var memberId = 0;
+	var members = function members() {
+	    var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+	    var action = arguments[1];
+	
+	    switch (action.type) {
+	        case 'ADD_MEMBER':
+	            return [].concat(_toConsumableArray(state), [{
+	                id: memberId++,
+	                username: action.username
+	            }]);
+	        default:
+	            return state;
+	    }
+	};
+	
+	//------------------------------------------------------------------------------
+	// Chat message store
+	//------------------------------------------------------------------------------
 	var messageId = 0;
 	var chatMesssages = function chatMesssages() {
 	    var state = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
@@ -11544,7 +11377,8 @@ webpackJsonp([0],[
 	var rootReducer = (0, _redux.combineReducers)({
 	    chatMesssages: chatMesssages,
 	    rooms: rooms,
-	    visibilityFilter: visibilityFilter
+	    visibilityFilter: visibilityFilter,
+	    members: members
 	});
 	
 	exports.default = rootReducer;
@@ -11572,12 +11406,16 @@ webpackJsonp([0],[
 	
 	var _DevTools2 = _interopRequireDefault(_DevTools);
 	
+	var _reduxThunk = __webpack_require__(477);
+	
+	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var finalCreateStore = (0, _redux.compose)(
 	// Middleware you want to use in development:
 	// Required! Enable Redux DevTools with the monitors you chose
-	(0, _redux.applyMiddleware)(), _DevTools2.default.instrument(),
+	(0, _redux.applyMiddleware)(_reduxThunk2.default), _DevTools2.default.instrument(),
 	// Optional. Lets you write ?debug_session=<key> in address bar to persist debug sessions
 	(0, _reduxDevtools.persistState)(getDebugSessionKey()))(_redux.createStore);
 	
@@ -11592,6 +11430,421 @@ webpackJsonp([0],[
 	  var store = finalCreateStore(_reducers2.default, initialState);
 	  return store;
 	}
+
+/***/ },
+/* 476 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	var sayActionCreator = exports.sayActionCreator = function sayActionCreator(message) {
+	    return {
+	        type: 'SAY',
+	        message: message
+	    };
+	};
+	
+	var addMessage = exports.addMessage = function addMessage(text) {
+	    return {
+	        type: 'ADD_MSG',
+	        text: text,
+	        username: 'roundrobin',
+	        date: +new Date()
+	    };
+	};
+	
+	var addRandomMember = exports.addRandomMember = function addRandomMember(text) {
+	    return {
+	        type: 'ADD_MEMBER',
+	        username: 'user-' + Math.floor(Math.random() * 1000)
+	    };
+	};
+	
+	var asyncSayActionCreator = exports.asyncSayActionCreator = function asyncSayActionCreator(message) {
+	    console.log('Yooooo 1');
+	    return function (dispatch) {
+	        console.log('toooo');
+	        setTimeout(function () {
+	            // Yay! Can invoke sync or async actions with `dispatch`
+	            dispatch({
+	                type: 'ADD_MSG',
+	                text: message,
+	                username: 'roundrobin',
+	                date: +new Date()
+	            });
+	        }, 1000);
+	    };
+	};
+
+/***/ },
+/* 477 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = thunkMiddleware;
+	function thunkMiddleware(_ref) {
+	  var dispatch = _ref.dispatch;
+	  var getState = _ref.getState;
+	
+	  return function (next) {
+	    return function (action) {
+	      return typeof action === 'function' ? action(dispatch, getState) : next(action);
+	    };
+	  };
+	}
+	module.exports = exports['default'];
+
+/***/ },
+/* 478 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.ChatThread = undefined;
+	
+	var _react = __webpack_require__(11);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactDom = __webpack_require__(176);
+	
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+	
+	var _reactRedux = __webpack_require__(167);
+	
+	var _actions = __webpack_require__(476);
+	
+	var _Replybox = __webpack_require__(479);
+	
+	var _Replybox2 = _interopRequireDefault(_Replybox);
+	
+	var _Members = __webpack_require__(480);
+	
+	var _Members2 = _interopRequireDefault(_Members);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } //------------------------------------------------------------------------------
+	// External dependencies
+	//------------------------------------------------------------------------------
+	
+	//------------------------------------------------------------------------------
+	// Internal dependencies
+	//------------------------------------------------------------------------------
+	
+	//------------------------------------------------------------------------------
+	// ChatThread component
+	//------------------------------------------------------------------------------
+	
+	var ChatThreadWrapped = (function (_React$Component) {
+	    _inherits(ChatThreadWrapped, _React$Component);
+	
+	    function ChatThreadWrapped() {
+	        _classCallCheck(this, ChatThreadWrapped);
+	
+	        return _possibleConstructorReturn(this, Object.getPrototypeOf(ChatThreadWrapped).apply(this, arguments));
+	    }
+	
+	    _createClass(ChatThreadWrapped, [{
+	        key: 'renderMessages',
+	        value: function renderMessages() {
+	            var messsages = this.props.chatMesssages;
+	            if (!messsages || messsages.length === 0) {
+	                return _react2.default.createElement(
+	                    'div',
+	                    null,
+	                    'No messages'
+	                );
+	            }
+	
+	            return messsages.map(function (msgObj) {
+	                console.log('view/ChatThread:renderMessages', msgObj);
+	                return _react2.default.createElement(
+	                    'div',
+	                    { key: msgObj.id, className: 'msg' },
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'msg__header' },
+	                        msgObj.username,
+	                        ' - ',
+	                        msgObj.date
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'msg__body' },
+	                        msgObj.text
+	                    )
+	                );
+	            });
+	        }
+	    }, {
+	        key: 'componentDidUpdate',
+	        value: function componentDidUpdate() {
+	            if (this.shouldScrollBottom && this.refs.messagesThread) {
+	                var node = _reactDom2.default.findDOMNode(this.refs.messagesThread);
+	                if (node) {
+	                    node.scrollTop = node.scrollHeight;
+	                }
+	            }
+	        }
+	    }, {
+	        key: 'componentWillUpdate',
+	        value: function componentWillUpdate() {
+	            if (this.refs.messagesThread) {
+	                var node = _reactDom2.default.findDOMNode(this.refs.messagesThread);
+	                this.shouldScrollBottom = node.scrollTop + node.offsetHeight === node.scrollHeight;
+	            }
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            console.log('view/ChatThread:render', 'call', this.props);
+	            var members = this.props.members;
+	
+	            return _react2.default.createElement(
+	                'div',
+	                null,
+	                _react2.default.createElement(
+	                    'button',
+	                    { onClick: this.props.asyncMessage.bind(this) },
+	                    'Async message adding'
+	                ),
+	                _react2.default.createElement(
+	                    'button',
+	                    { onClick: this.props.asyncMemberAction.bind(this) },
+	                    'Add random member'
+	                ),
+	                _react2.default.createElement(_Members2.default, { members: members }),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'message-thread', ref: 'messagesThread' },
+	                    this.renderMessages()
+	                ),
+	                _react2.default.createElement(_Replybox2.default, { onSend: this.props.sendMessage })
+	            );
+	        }
+	    }]);
+	
+	    return ChatThreadWrapped;
+	})(_react2.default.Component);
+	
+	var mapStateToProps = function mapStateToProps(state) {
+	    return {
+	        members: state.members,
+	        chatMesssages: state.chatMesssages
+	    };
+	};
+	
+	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+	    return {
+	        asyncMessage: function asyncMessage(id) {
+	            dispatch((0, _actions.asyncSayActionCreator)('Hiii man'));
+	        },
+	        sendMessage: function sendMessage(text) {
+	            dispatch((0, _actions.addMessage)(text));
+	        },
+	        asyncMemberAction: function asyncMemberAction() {
+	            dispatch((0, _actions.addRandomMember)());
+	        }
+	    };
+	};
+	
+	var ChatThread = exports.ChatThread = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(ChatThreadWrapped);
+
+/***/ },
+/* 479 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _react = __webpack_require__(11);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactDom = __webpack_require__(176);
+	
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } //------------------------------------------------------------------------------
+	// External dependencies
+	//------------------------------------------------------------------------------
+	
+	//------------------------------------------------------------------------------
+	// Internal dependencies
+	//------------------------------------------------------------------------------
+	var ENTER_KEY = 13;
+	//------------------------------------------------------------------------------
+	// Replybox component
+	//------------------------------------------------------------------------------
+	
+	var Replybox = (function (_React$Component) {
+	    _inherits(Replybox, _React$Component);
+	
+	    function Replybox() {
+	        _classCallCheck(this, Replybox);
+	
+	        return _possibleConstructorReturn(this, Object.getPrototypeOf(Replybox).apply(this, arguments));
+	    }
+	
+	    _createClass(Replybox, [{
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            var _this2 = this;
+	
+	            document.addEventListener('keypress', function (e) {
+	                if (e.which === ENTER_KEY) {
+	                    _this2.sendMessage();
+	                }
+	            });
+	        }
+	    }, {
+	        key: 'sendMessage',
+	        value: function sendMessage() {
+	            var text = this.refs.replyInput.value;
+	            // Only send a message if the text is not empty
+	            if (text) {
+	                this.props.onSend(text);
+	                this.refs.replyInput.value = '';
+	            }
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'reply-box' },
+	                _react2.default.createElement('input', { type: 'text', ref: 'replyInput', className: 'reply-box__input', placeholder: 'Say something nice' }),
+	                _react2.default.createElement(
+	                    'button',
+	                    { className: 'reply-box__send', onClick: this.sendMessage.bind(this) },
+	                    'Send'
+	                )
+	            );
+	        }
+	    }]);
+	
+	    return Replybox;
+	})(_react2.default.Component);
+	
+	exports.default = Replybox;
+
+/***/ },
+/* 480 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _react = __webpack_require__(11);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactDom = __webpack_require__(176);
+	
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } //------------------------------------------------------------------------------
+	// External dependencies
+	//------------------------------------------------------------------------------
+	
+	//------------------------------------------------------------------------------
+	// Internal dependencies
+	//------------------------------------------------------------------------------
+	//------------------------------------------------------------------------------
+	// Members component
+	//------------------------------------------------------------------------------
+	
+	var Members = (function (_React$Component) {
+	    _inherits(Members, _React$Component);
+	
+	    function Members() {
+	        _classCallCheck(this, Members);
+	
+	        return _possibleConstructorReturn(this, Object.getPrototypeOf(Members).apply(this, arguments));
+	    }
+	
+	    _createClass(Members, [{
+	        key: 'renderMembers',
+	        value: function renderMembers() {
+	            var _this2 = this;
+	
+	            var memberKeys = Object.keys(this.props.members);
+	            if (!memberKeys || memberKeys.length === 0) {
+	                return _react2.default.createElement(
+	                    'div',
+	                    null,
+	                    'No members'
+	                );
+	            }
+	
+	            return memberKeys.map(function (username) {
+	                var member = _this2.props.members[username];
+	                console.log('view/Members:renderMembers', member);
+	                return _react2.default.createElement(
+	                    'div',
+	                    { key: member.id, className: 'member' },
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'member__username' },
+	                        member.username
+	                    )
+	                );
+	            });
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'members' },
+	                this.renderMembers()
+	            );
+	        }
+	    }]);
+	
+	    return Members;
+	})(_react2.default.Component);
+	
+	exports.default = Members;
 
 /***/ }
 ]);

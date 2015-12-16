@@ -2,6 +2,24 @@ import {createStore, combineReducers} from 'redux';
 //------------------------------------------------------------------------------
 // Chat message store
 //------------------------------------------------------------------------------
+let memberId = 0;
+const members = (state = {}, action)=>{
+    switch(action.type){
+        case 'ADD_MEMBER':
+            return [
+            ...state,
+            {
+                id: memberId++,
+                username: action.username
+            }];
+        default:
+            return state
+    }
+}
+
+//------------------------------------------------------------------------------
+// Chat message store
+//------------------------------------------------------------------------------
 let messageId = 0;
 const chatMesssages = (state = [], action)=>{
     switch(action.type){
@@ -54,7 +72,8 @@ const visibilityFilter = (state = false, action)=>{
 const rootReducer = combineReducers({
     chatMesssages,
     rooms,
-    visibilityFilter
+    visibilityFilter,
+    members
 });
 
 export default rootReducer;

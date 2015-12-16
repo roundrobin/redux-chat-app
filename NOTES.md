@@ -1,6 +1,6 @@
 
 // Technologies
-normalizr????
+normalizr???? https://github.com/gaearon/normalizr
 Webpack
 ES7
 Redux
@@ -15,3 +15,13 @@ Reducers
 ActionProvider
 View
 Simple Views
+
+
+LocalStorage
+Websocket
+Ajax
+EventSource
+
+
+
+How to test actions, reducers &  other things!

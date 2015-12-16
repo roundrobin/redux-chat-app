@@ -22,9 +22,8 @@ import './src/css/main.scss';
 import configureStore from './src/configureStore';
 
 import {
-    Replybox,
     ChatThread
-} from './src/components.jsx';
+} from './src/components/ChatThread.jsx';
 
 import DevTools from './src/DevTools.jsx';
 
@@ -33,25 +32,18 @@ import DevTools from './src/DevTools.jsx';
 // Store creation
 //------------------------------------------------------------------------------
 const store = configureStore();
+
 //------------------------------------------------------------------------------
 // Render main view
 //------------------------------------------------------------------------------
-const render = ()=> {
-    ReactDOM.render(
+ReactDOM.render(
         <Provider store={store}>
             <div>
                 <ChatThread/>
                 <DevTools />
             </div>
         </Provider>,
-        document.getElementById('root'))
-}
-
-store.subscribe(()=>{
-    render();
-});
-
-render();
+    document.getElementById('root'))
 
 console.log('App started', store.getState());
 
