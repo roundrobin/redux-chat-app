@@ -1,8 +1,9 @@
+import {createStore, combineReducers} from 'redux';
 //------------------------------------------------------------------------------
 // Chat message store
 //------------------------------------------------------------------------------
 let messageId = 0;
-export const chatMesssages = (state = [], action)=>{
+const chatMesssages = (state = [], action)=>{
     switch(action.type){
         case 'ADD_MSG':
             return [
@@ -23,7 +24,7 @@ export const chatMesssages = (state = [], action)=>{
 // Rooms store
 //------------------------------------------------------------------------------
 let roomId = 0;
-export const rooms = (state = [], action)=>{
+const rooms = (state = [], action)=>{
     switch(action.type){
         case 'ADD_ROOM':
             return [
@@ -40,7 +41,7 @@ export const rooms = (state = [], action)=>{
 //------------------------------------------------------------------------------
 // Visibilty store
 //------------------------------------------------------------------------------
-export const visibilityFilter = (state = false, action)=>{
+const visibilityFilter = (state = false, action)=>{
     switch(action.type){
         case 'TOGGLE':
             return action.filter;
@@ -48,3 +49,15 @@ export const visibilityFilter = (state = false, action)=>{
             return state
     }
 }
+
+
+const rootReducer = combineReducers({
+    chatMesssages,
+    rooms,
+    visibilityFilter
+});
+
+export default rootReducer;
+
+
+

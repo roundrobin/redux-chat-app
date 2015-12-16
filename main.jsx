@@ -12,42 +12,37 @@ import React from 'react';
 import {Provider} from 'react-redux';
 import ReactDOM from 'react-dom';
 
+
 //------------------------------------------------------------------------------
 // Internal dependencies
 //------------------------------------------------------------------------------
 import './src/css/main.scss';
 
-import {
-    chatMesssages,
-    rooms,
-    visibilityFilter
-} from './src/stores';
 
+import configureStore from './src/configureStore';
 
 import {
     Replybox,
     ChatThread
 } from './src/components.jsx';
 
+import DevTools from './src/DevTools.jsx';
+
 
 //------------------------------------------------------------------------------
 // Store creation
 //------------------------------------------------------------------------------
-const appStore = combineReducers({
-    chatMesssages,
-    rooms,
-    visibilityFilter
-});
-
-const store = createStore(appStore);
-
+const store = configureStore();
 //------------------------------------------------------------------------------
 // Render main view
 //------------------------------------------------------------------------------
 const render = ()=> {
     ReactDOM.render(
         <Provider store={store}>
-            <ChatThread/>
+            <div>
+                <ChatThread/>
+                <DevTools />
+            </div>
         </Provider>,
         document.getElementById('root'))
 }

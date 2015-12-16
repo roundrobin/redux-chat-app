@@ -1,7 +1,21 @@
+//------------------------------------------------------------------------------
+// Base styles
+//------------------------------------------------------------------------------
+
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
 body{
     font-family: Verdana, sans;
 }
 
+//------------------------------------------------------------------------------
+// Message thread
+//------------------------------------------------------------------------------
 .message-thread{
     position: absolute;
     top: 60px;
@@ -13,6 +27,9 @@ body{
     overflow-y: scroll;
 
 }
+//------------------------------------------------------------------------------
+// Reply box
+//------------------------------------------------------------------------------
 .reply-box{
     position: absolute;
     left: 0px;
@@ -33,6 +50,9 @@ $input-width: 80px;
     font-size: 14px;
     padding-left: 10px;
     outline: 0px;
+    &:focus{
+        border: 1px solid #4A90E2;
+    }
 }
 
 .reply-box__send{
@@ -43,17 +63,14 @@ $input-width: 80px;
     background-color: #4A90E2;
     border: 0px;
     position: absolute;
-    bottom: 2px;
-    right: 10px;
+    bottom: 0px;
+    right: 0px;
     outline: 0px;
 
 }
-
-
-.msg{
-
-}
-
+//------------------------------------------------------------------------------
+// Messages
+//------------------------------------------------------------------------------
 .msg__header{
     color: gray;
     font-size: 0.9em;

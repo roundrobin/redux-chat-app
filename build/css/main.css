@@ -1,3 +1,9 @@
+html {
+  box-sizing: border-box; }
+
+*, *:before, *:after {
+  box-sizing: inherit; }
+
 body {
   font-family: Verdana, sans; }
 
@@ -27,6 +33,8 @@ body {
   font-size: 14px;
   padding-left: 10px;
   outline: 0px; }
+  .reply-box__input:focus {
+    border: 1px solid #4A90E2; }
 
 .reply-box__send {
   height: 40px;
@@ -36,8 +44,8 @@ body {
   background-color: #4A90E2;
   border: 0px;
   position: absolute;
-  bottom: 2px;
-  right: 10px;
+  bottom: 0px;
+  right: 0px;
   outline: 0px; }
 
 .msg__header {
