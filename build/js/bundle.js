@@ -11322,8 +11322,21 @@ webpackJsonp([0],[
 	// Chat message store
 	//------------------------------------------------------------------------------
 	var messageId = 0;
+	
+	var initialState = [];
+	
+	for (var i = 0; i < 150; i++) {
+	    initialState.push({
+	        id: messageId++,
+	        text: 'message-' + messageId,
+	        username: 'nelson',
+	        date: +new Date(),
+	        upvotes: 0
+	    });
+	}
+	
 	var chatMesssages = function chatMesssages() {
-	    var state = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
+	    var state = arguments.length <= 0 || arguments[0] === undefined ? initialState : arguments[0];
 	    var action = arguments[1];
 	
 	    switch (action.type) {
@@ -11551,6 +11564,7 @@ webpackJsonp([0],[
 	//------------------------------------------------------------------------------
 	// ChatThread component
 	//------------------------------------------------------------------------------
+	var scrolledDown = false;
 	
 	var ChatThreadWrapped = (function (_React$Component) {
 	    _inherits(ChatThreadWrapped, _React$Component);
@@ -11609,6 +11623,23 @@ webpackJsonp([0],[
 	            if (this.refs.messagesThread) {
 	                var node = _reactDom2.default.findDOMNode(this.refs.messagesThread);
 	                this.shouldScrollBottom = node.scrollTop + node.offsetHeight === node.scrollHeight;
+	            }
+	        }
+	    }, {
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            if (!scrolledDown) {
+	                scrolledDown = true;
+	                this._scrollToBottom();
+	            }
+	        }
+	    }, {
+	        key: '_scrollToBottom',
+	        value: function _scrollToBottom() {
+	            if (this.refs.messagesThread) {
+	                var messageThreadNode = _reactDom2.default.findDOMNode(this.refs.messagesThread);
+	                var scrollHeight = messageThreadNode.scrollHeight;
+	                messageThreadNode.scrollTop = scrollHeight + 2000;
 	            }
 	        }
 	    }, {

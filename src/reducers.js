@@ -21,7 +21,20 @@ const members = (state = {}, action)=>{
 // Chat message store
 //------------------------------------------------------------------------------
 let messageId = 0;
-const chatMesssages = (state = [], action)=>{
+
+let initialState = [];
+
+for(let i=0;i< 150;i++){
+    initialState.push({
+        id: messageId++,
+        text: 'message-'+messageId,
+        username: 'nelson',
+        date: +new Date(),
+        upvotes: 0
+    });
+}
+
+const chatMesssages = (state = initialState, action)=>{
     switch(action.type){
         case 'ADD_MSG':
             return [

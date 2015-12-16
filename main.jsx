@@ -43,7 +43,7 @@ ReactDOM.render(
                 <DevTools />
             </div>
         </Provider>,
-    document.getElementById('root'))
+    document.getElementById('root'));
 
 console.log('App started', store.getState());
 

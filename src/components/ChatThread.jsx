@@ -16,6 +16,7 @@ import Members from './Members.jsx';
 //------------------------------------------------------------------------------
 // ChatThread component
 //------------------------------------------------------------------------------
+let scrolledDown = false;
 class ChatThreadWrapped extends React.Component{
     renderMessages(){
         let messsages = this.props.chatMesssages;
@@ -45,6 +46,20 @@ class ChatThreadWrapped extends React.Component{
         if(this.refs.messagesThread){
             let node = ReactDOM.findDOMNode(this.refs.messagesThread);
             this.shouldScrollBottom = node.scrollTop + node.offsetHeight === node.scrollHeight;
+        }
+
+    }
+    componentDidMount(){
+        if(!scrolledDown){
+            scrolledDown = true;
+            this._scrollToBottom();
+        }
+    }
+    _scrollToBottom(){
+        if(this.refs.messagesThread){
+            let messageThreadNode = ReactDOM.findDOMNode(this.refs.messagesThread);
+            let scrollHeight = messageThreadNode.scrollHeight;
+            messageThreadNode.scrollTop = scrollHeight + 2000;
         }
 
     }
