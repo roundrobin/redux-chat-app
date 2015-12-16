@@ -22,6 +22,10 @@
             2: { _id: 2, title: "Space", unreadCount: 0, topic: {}, bots: {}, hasMention: true}
         }
     },
+    views: {
+        showUnreadMessagePill: false,
+        showUnreadPMPill: false
+    },
     diaglogs: {
         banned: {show: true},
         importantAnnounceMent: {show: false}
