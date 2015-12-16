@@ -3,7 +3,7 @@
     app:{
         isEmbed: false,
         nrOfRooms: 9,
-        carrotUsersOnline: ['enoex', 'thirstySalesman'],
+        carrotUsersOnline: ["roundrobin", "dr.dre"],
         connectedToWebsocket: true,
         windowIsFocused: false,
         isOnline: false,
@@ -13,7 +13,7 @@
         loggedIn: true,
         isOnline: true
         user: {
-            username: 'enoex'
+            username: "roundrobin"
         }
     },
     diaglogs: {
@@ -22,42 +22,42 @@
     },
     settings: {
         sound: true,
-        pushNotifications: true
+        pushNotifications: true,
+        showJoinMessages: false,
+        showLeaveMessages: true
     },
     rooms: {
-        0: { _id: 0, title: "Games", unreadCount: 0, topic: {...}, bots: {...}, hasMention: true},
-        1: { _id: 1, title: "Chess", unreadCount: 0, topic: {...}, bots: {...},  hasMention: true},
-        2: { _id: 2, title: "Space", unreadCount: 0, topic: {...}, bots: {...}, hasMention: true},
-        3: { _id: 3, title: "Movies", unreadCount: 0, topic: {...}, bots: {...}, hasMention: true},
-        4: { _id: 4, title: "Skating", unreadCount: 0, topic: {...}, bots: {...}, hasMention: true},
-        5: { _id: 5, title: "Wind Surfing", unreadCount: 0, topic: {...}, bots: {...}, hasMention: true},
-        6: { _id: 6, title: "Camping", unreadCount: 0, topic: {...}, bots: {...}, hasMention: true},
-        7: { _id: 7, title: "Whales", unreadCount: 0, topic: {...}, bots: {...}, hasMention: true},
-        8: { _id: 8, title: "Food", unreadCount: 0, topic: {...}, bots: {...}, hasMention: true}
+        0: { _id: 0, title: "Games", unreadCount: 0, topic: {}, bots: {}, hasMention: true},
+        1: { _id: 1, title: "Chess", unreadCount: 0, topic: {}, bots: {},  hasMention: true},
+        2: { _id: 2, title: "Space", unreadCount: 0, topic: {}, bots: {}, hasMention: true},
+        3: { _id: 3, title: "Movies", unreadCount: 0, topic: {}, bots: {}, hasMention: true},
+        4: { _id: 4, title: "Skating", unreadCount: 0, topic: {}, bots: {}, hasMention: true},
+        5: { _id: 5, title: "Wind Surfing", unreadCount: 0, topic: {}, bots: {}, hasMention: true},
+        6: { _id: 6, title: "Camping", unreadCount: 0, topic: {}, bots: {}, hasMention: true},
+        7: { _id: 7, title: "Whales", unreadCount: 0, topic: {}, bots: {}, hasMention: true},
+        8: { _id: 8, title: "Food", unreadCount: 0, topic: {}, bots: {}, hasMention: true}
     },
     messages: {
-        //Room: 0
         0: [
-            { _id: 123, text: "Hello", date: 12345}
+            { _id: 123, text: "Hello", timestamp: 12345},
+            { _id: 124, text: "How are you?", timestamp: 12345}
         ]
     },
     members: {
-        //Room: 0
         0: [
-            { _id: 123, username: "calbearia", online: true, flair: {}, isMod: false, isAdmin: false}
+            { _id: 456434, username: "The game", online: true, flair: {}, isMod: false, isAdmin: false},
+            { _id: 456435, username: "A$ap Rocky", online: true, flair: {}, isMod: false, isAdmin: false},
         ]
     },
-    route: {
-        name: 'chat',
-        value: 'berkeley'
+    currentRoute: {
+        name: "chat",
+        value: "berkeley"
     },
     recentContacts: {
-        'enoex': {
-            username: 'enoex',
+        "roundrobin": {
+            username: "roundrobin",
             isOnline: true,
             unreadMessages: 5
         }
     }
-
-
 }
