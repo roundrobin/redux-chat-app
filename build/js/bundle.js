@@ -11774,10 +11774,10 @@ webpackJsonp([0],[
 	    }, {
 	        key: 'sendMessage',
 	        value: function sendMessage() {
-	            var text = this.refs.replyInput.value;
+	            var text = this.refs.replyInput;
 	            // Only send a message if the text is not empty
-	            if (text) {
-	                this.props.onSend(text);
+	            if (text && text.value) {
+	                this.props.onSend(text.value);
 	                this.refs.replyInput.value = '';
 	            }
 	        }
@@ -17401,6 +17401,15 @@ webpackJsonp([0],[
 	    value: true
 	});
 	
+	var _DevTools = __webpack_require__(473);
+	
+	var _DevTools2 = _interopRequireDefault(_DevTools);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	//------------------------------------------------------------------------------
+	// External dependencies
+	//------------------------------------------------------------------------------
 	var React = __webpack_require__(11);
 	
 	var _require = __webpack_require__(481);
@@ -17414,7 +17423,13 @@ webpackJsonp([0],[
 	var _require3 = __webpack_require__(537);
 	
 	var pushPath = _require3.pushPath;
+	//------------------------------------------------------------------------------
+	// Internal dependencies
+	//------------------------------------------------------------------------------
 	
+	//------------------------------------------------------------------------------
+	// View
+	//------------------------------------------------------------------------------
 	function App(_ref) {
 	    var pushPath = _ref.pushPath;
 	    var children = _ref.children;
@@ -17422,7 +17437,8 @@ webpackJsonp([0],[
 	    return React.createElement(
 	        'div',
 	        null,
-	        children
+	        children,
+	        React.createElement(_DevTools2.default, null)
 	    );
 	}
 	exports.default = connect(null, { pushPath: pushPath })(App);
@@ -17440,12 +17456,9 @@ webpackJsonp([0],[
 	
 	var _ChatThread = __webpack_require__(478);
 	
-	var _DevTools = __webpack_require__(473);
-	
-	var _DevTools2 = _interopRequireDefault(_DevTools);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
+	//------------------------------------------------------------------------------
+	// External dependencies
+	//------------------------------------------------------------------------------
 	var React = __webpack_require__(11);
 	
 	var _require = __webpack_require__(481);
@@ -17459,7 +17472,13 @@ webpackJsonp([0],[
 	var _require3 = __webpack_require__(537);
 	
 	var pushPath = _require3.pushPath;
+	//------------------------------------------------------------------------------
+	// Internval dependencies
+	//------------------------------------------------------------------------------
 	
+	//------------------------------------------------------------------------------
+	// Views
+	//------------------------------------------------------------------------------
 	function HomeView(_ref) {
 	    var pushPath = _ref.pushPath;
 	    var children = _ref.children;
@@ -17474,8 +17493,7 @@ webpackJsonp([0],[
 	                } },
 	            'Go to /foo'
 	        ),
-	        React.createElement(_ChatThread.ChatThread, this.props),
-	        React.createElement(_DevTools2.default, null)
+	        React.createElement(_ChatThread.ChatThread, this.props)
 	    );
 	}
 	

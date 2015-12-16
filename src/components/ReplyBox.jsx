@@ -21,10 +21,10 @@ export default class Replybox extends React.Component{
         });
     }
     sendMessage(){
-        let text = this.refs.replyInput.value;
+        let text = this.refs.replyInput;
         // Only send a message if the text is not empty
-        if(text){
-            this.props.onSend(text);
+        if(text && text.value){
+            this.props.onSend(text.value);
             this.refs.replyInput.value = '';
         }
     }

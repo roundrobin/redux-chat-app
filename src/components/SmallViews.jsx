@@ -1,21 +1,22 @@
-
+//------------------------------------------------------------------------------
+// External dependencies
+//------------------------------------------------------------------------------
 const React = require('react');
 const { Link } = require('react-router');
 const { connect } = require('react-redux');
 const { pushPath } = require('redux-simple-router');
+//------------------------------------------------------------------------------
+// Internval dependencies
+//------------------------------------------------------------------------------
+import { ChatThread} from './ChatThread.jsx';
 
-import {
-    ChatThread
-} from './ChatThread.jsx';
-
-import DevTools from '../DevTools.jsx';
-
-
+//------------------------------------------------------------------------------
+// Views
+//------------------------------------------------------------------------------
 function HomeView({ pushPath, children }) {
     return <div>
             <button onClick={() => pushPath('/foo')}>Go to /foo</button>
             <ChatThread {...this.props}/>
-            <DevTools />
     </div>
 
 }
@@ -24,8 +25,6 @@ export const Home = connect(
   null,
   { pushPath }
 )(HomeView);
-
-
 
 function FooView({ pushPath, children }) {
     return <div>
