@@ -25,7 +25,6 @@ class ChatThreadWrapped extends React.Component{
         }
 
         return messsages.map((msgObj)=>{
-                console.log('view/ChatThread:renderMessages',msgObj);
                 return (
                     <div key={msgObj.id} className='msg'>
                         <div className='msg__header'>{msgObj.username} - {msgObj.date}</div>

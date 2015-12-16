@@ -1,4 +1,6 @@
 import {createStore, combineReducers} from 'redux';
+import { routeReducer } from 'redux-simple-router'
+
 //------------------------------------------------------------------------------
 // Chat message store
 //------------------------------------------------------------------------------
@@ -86,7 +88,8 @@ const rootReducer = combineReducers({
     chatMesssages,
     rooms,
     visibilityFilter,
-    members
+    members,
+    routing: routeReducer
 });
 
 export default rootReducer;
